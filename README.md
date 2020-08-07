@@ -1,24 +1,65 @@
-# README
+# README FURIMA_28335
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## テーブル設計
 
-Things you may want to cover:
+### usersテーブル
 
-* Ruby version
+| Column   | Type   | Options     |
+| nickname | string | null: false |
+| email    | string | null: false |
+| password | string | null: false |
+| name_1   | string | null: false |
+| name_2   | string | null: false |
+| kana_1   | string | null: false |
+| kana_2   | string | null: false |
+| birthday | date   | null: false |
 
-* System dependencies
+#### Association
 
-* Configuration
+- has_many :items
+- has_many :buys
 
-* Database creation
+### itemsテーブル
 
-* Database initialization
+| Column      | Type       | Options                        |
+| user        | references | null: false, foreign_key: true |
+| title       | string     | null: false                    |
+| description | text       | null: false                    |
+| category_id | integer    | null: false                    |
+| state_id    | integer    | null: false                    |
+| charge_id   | integer    | null: false                    |
+| area_id     | integer    | null: false                    |
+| due_id      | integer    | null: false                    |
+| price       | integer    | null: false                    |
 
-* How to run the test suite
+#### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_one :buy
 
-* Deployment instructions
+### buysテーブル
 
-* ...
+| Column | Type       | Options                        |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+
+#### Association
+
+- belongs_to :item
+- belongs_to :user
+- has_one :ship
+
+### shipsテーブル
+
+| Column  | Type       | Options                        |
+| buy     | references | null: false, foreign_key: true |
+| postal  | string     | null: false                    |
+| pref_id | integer    | null: false                    |
+| city    | string     | null: false                    |
+| number  | string     | null: false                    |
+| house   | string     |                                |
+| tel     | string     | null: false                    |
+
+#### Association
+
+- belongs_to :buy
