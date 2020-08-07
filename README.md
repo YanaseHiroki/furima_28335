@@ -22,7 +22,7 @@
 ### itemsテーブル
 
 | Column      | Type       | Options                        |
-| user_id     | references | null: false, foreign_key: true |
+| user        | references | null: false, foreign_key: true |
 | title       | string     | null: false                    |
 | description | text       | null: false                    |
 | category_id | integer    | null: false                    |
@@ -39,9 +39,9 @@
 
 ### buysテーブル
 
-| Column  | Type       | Options                        |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 #### Association
 
@@ -51,14 +51,14 @@
 
 ### shipsテーブル
 
-| Column  | Type       | Options                        |
-| buy_id  | references | null: false, foreign_key: true |
-| postal  | integer    | null: false                    |
-| pref    | string     | null: false                    |
-| city    | string     | null: false                    |
-| number  | string     | null: false                    |
-| house   | string     |                                |
-| tel     | string    | null: false                    |
+| Column | Type       | Options                        |
+| buy    | references | null: false, foreign_key: true |
+| postal | integer    | null: false                    |
+| pref   | string     | null: false                    |
+| city   | string     | null: false                    |
+| number | string     | null: false                    |
+| house  | string     |                                |
+| tel    | string     | null: false                    |
 
 #### Association
 
