@@ -18,7 +18,6 @@
 
 - has_many :items
 - has_many :buys
-- has_many :ships
 
 ### itemsテーブル
 
@@ -60,9 +59,8 @@
 | city    | string     | null: false                    |
 | number  | string     | null: false                    |
 | house   | string     |                                |
-| tel     | integer    | null: false                    |
+| tel     | string     | null: false                    |
 
 #### Association
 
-- belongs_to :user
 - belongs_to :buy
