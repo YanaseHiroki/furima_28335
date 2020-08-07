@@ -4,13 +4,16 @@
 
 ### usersテーブル
 
-| Column   | Type    | Options     |
-| nickname | string  | null: false |
-| email    | string  | null: false |
-| password | string  | null: false |
-| name     | string  |             |
-| kana     | string  |             |
-| birthday | integer |             |
+| Column   | Type   | Options     |
+| nickname | string | null: false |
+| email    | string | null: false |
+| password | string | null: false |
+| name_1   | string | null: false |
+| name_2   | string | null: false |
+| kana_1   | string | null: false |
+| kana_2   | string | null: false |
+| birthday | date   | null: false |
+
 #### Association
 
 - has_many :items
@@ -23,11 +26,11 @@
 | user_id     | references | null: false, foreign_key: true |
 | title       | string     | null: false                    |
 | description | text       | null: false                    |
-| category    | string     | null: false                    |
-| state       | string     | null: false                    |
-| charge      | string     | null: false                    |
-| area        | string     | null: false                    |
-| due         | string     | null: false                    |
+| category_id | integer    | null: false                    |
+| state_id    | integer    | null: false                    |
+| charge_id   | integer    | null: false                    |
+| area_id     | integer    | null: false                    |
+| due_id      | integer    | null: false                    |
 | price       | integer    | null: false                    |
 
 #### Association
@@ -40,9 +43,6 @@
 | Column  | Type       | Options                        |
 | user_id | references | null: false, foreign_key: true |
 | item_id | references | null: false, foreign_key: true |
-| credit  | integer    | null: false                    |
-| expire  | integer    | null: false                    |
-| cvv     | integer    | null: false                    |
 
 #### Association
 
