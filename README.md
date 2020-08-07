@@ -1,24 +1,68 @@
-# README
+# README FURIMA_28335
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## テーブル設計
 
-Things you may want to cover:
+### usersテーブル
 
-* Ruby version
+| Column   | Type    | Options     |
+| nickname | string  | null: false |
+| email    | string  | null: false |
+| password | string  | null: false |
+| name     | string  |             |
+| kana     | string  |             |
+| birthday | integer |             |
+#### Association
 
-* System dependencies
+- has_many :items
+- has_many :buys
+- has_many :ships
 
-* Configuration
+### itemsテーブル
 
-* Database creation
+| Column      | Type       | Options                        |
+| user_id     | references | null: false, foreign_key: true |
+| title       | string     | null: false                    |
+| description | text       | null: false                    |
+| category    | string     | null: false                    |
+| state       | string     | null: false                    |
+| charge      | string     | null: false                    |
+| area        | string     | null: false                    |
+| due         | string     | null: false                    |
+| price       | integer    | null: false                    |
 
-* Database initialization
+#### Association
 
-* How to run the test suite
+- belongs_to :user
+- has_one :buy
 
-* Services (job queues, cache servers, search engines, etc.)
+### buysテーブル
 
-* Deployment instructions
+| Column  | Type       | Options                        |
+| user_id | references | null: false, foreign_key: true |
+| item_id | references | null: false, foreign_key: true |
+| credit  | integer    | null: false                    |
+| expire  | integer    | null: false                    |
+| cvv     | integer    | null: false                    |
 
-* ...
+#### Association
+
+- belongs_to :item
+- belongs_to :user
+- has_one :ship
+
+### shipsテーブル
+
+| Column  | Type       | Options                        |
+| buy_id  | references | null: false, foreign_key: true |
+| user_id | references | null: false, foreign_key: true |
+| postal  | integer    | null: false                    |
+| pref    | string     | null: false                    |
+| city    | string     | null: false                    |
+| number  | string     | null: false                    |
+| house   | string     |                                |
+| tel     | integer    | null: false                    |
+
+#### Association
+
+- belongs_to :user
+- belongs_to :buy
