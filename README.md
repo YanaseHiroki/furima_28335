@@ -18,7 +18,6 @@
 
 - has_many :items
 - has_many :buys
-- has_many :ships
 
 ### itemsテーブル
 
@@ -54,15 +53,13 @@
 
 | Column  | Type       | Options                        |
 | buy_id  | references | null: false, foreign_key: true |
-| user_id | references | null: false, foreign_key: true |
 | postal  | integer    | null: false                    |
 | pref    | string     | null: false                    |
 | city    | string     | null: false                    |
 | number  | string     | null: false                    |
 | house   | string     |                                |
-| tel     | integer    | null: false                    |
+| tel     | string    | null: false                    |
 
 #### Association
 
-- belongs_to :user
 - belongs_to :buy
