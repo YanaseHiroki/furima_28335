@@ -51,14 +51,14 @@
 
 ### shipsテーブル
 
-| Column | Type       | Options                        |
-| buy    | references | null: false, foreign_key: true |
-| postal | integer    | null: false                    |
-| pref   | string     | null: false                    |
-| city   | string     | null: false                    |
-| number | string     | null: false                    |
-| house  | string     |                                |
-| tel    | string     | null: false                    |
+| Column  | Type       | Options                        |
+| buy     | references | null: false, foreign_key: true |
+| postal  | string     | null: false                    |
+| pref_id | integer    | null: false                    |
+| city    | string     | null: false                    |
+| number  | string     | null: false                    |
+| house   | string     |                                |
+| tel     | string     | null: false                    |
 
 #### Association
 
