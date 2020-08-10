@@ -24,6 +24,7 @@
 | Column      | Type       | Options                        |
 | user        | references | null: false, foreign_key: true |
 | title       | string     | null: false                    |
+| image       | string     | null: false                    |
 | description | text       | null: false                    |
 | category_id | integer    | null: false                    |
 | state_id    | integer    | null: false                    |
@@ -31,6 +32,7 @@
 | area_id     | integer    | null: false                    |
 | due_id      | integer    | null: false                    |
 | price       | integer    | null: false                    |
+| star        | integer    | null: false                    |
 
 #### Association
 
