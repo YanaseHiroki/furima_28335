@@ -24,7 +24,7 @@
 | Column      | Type       | Options                        |
 | user        | references | null: false, foreign_key: true |
 | title       | string     | null: false                    |
-| image       | text       | null: false                    |
+| image       | string     | null: false                    |
 | description | text       | null: false                    |
 | category_id | integer    | null: false                    |
 | state_id    | integer    | null: false                    |
