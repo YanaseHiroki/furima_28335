@@ -5,9 +5,9 @@
 ### usersテーブル
 
 | Column   | Type   | Options     |
-| nickname | string | null: false |
 | email    | string | null: false |
 | password | string | null: false |
+| nickname | string | null: false |
 | name_1   | string | null: false |
 | name_2   | string | null: false |
 | kana_1   | string | null: false |
