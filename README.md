@@ -4,15 +4,15 @@
 
 ### usersテーブル
 
-| Column   | Type   | Options     |
-| nickname | string | null: false |
-| email    | string | null: false |
-| password | string | null: false |
-| name_1   | string | null: false |
-| name_2   | string | null: false |
-| kana_1   | string | null: false |
-| kana_2   | string | null: false |
-| birthday | date   | null: false |
+| Column             | Type   | Options     |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| nickname           | string | null: false |
+| name_1             | string | null: false |
+| name_2             | string | null: false |
+| kana_1             | string | null: false |
+| kana_2             | string | null: false |
+| birthday           | date   | null: false |
 
 #### Association
 

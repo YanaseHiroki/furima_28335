@@ -2,6 +2,10 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 .main {
   background: #f8f8f8;
 }
@@ -248,8 +252,6 @@ a {
   width: 37vh;
   padding: 1vw;
   background-color: #FFF;
-  // 中黒非表示のため追加
-  list-style: none;
 }
 
 
