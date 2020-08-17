@@ -29,7 +29,7 @@
 | category_id | integer    | null: false                    |
 | state_id    | integer    | null: false                    |
 | charge_id   | integer    | null: false                    |
-| area_id     | integer    | null: false                    |
+| pref_id     | integer    | null: false                    |
 | due_id      | integer    | null: false                    |
 | price       | integer    | null: false                    |
 | star        | integer    | null: false                    |
