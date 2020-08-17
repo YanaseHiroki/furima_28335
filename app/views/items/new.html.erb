@@ -5,11 +5,9 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with local: true do |f| %>
+    <%= form_with model: @item, url: items_path, local: true do |f| %>
 
-    <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-    <%# render 'shared/error_messages', model: f.object %>
-    <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
+    <%= render 'shared/error_messages', model: f.object %>
 
     <%# 出品画像 %>
     <div class="img-upload">
@@ -25,6 +23,7 @@
       </div>
     </div>
     <%# /出品画像 %>
+
     <%# 商品名と商品説明 %>
     <div class="new-items">
       <div class="weight-bold-text">
@@ -50,12 +49,12 @@
           カテゴリー
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:category, [], :hoge, :hoge, {}, {class:"select-box", id:"item-category"}) %>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:state, [], :hoge, :hoge, {}, {class:"select-box", id:"item-sales-status"}) %>
+        <%= f.collection_select(:state_id, State.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
       </div>
     </div>
     <%# /商品の詳細 %>
@@ -71,17 +70,17 @@
           配送料の負担
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:charge, [], :hoge, :hoge, {}, {class:"select-box", id:"item-shipping-fee-status"}) %>
+        <%= f.collection_select(:charge_id, Charge.all, :id, :name, {}, {class:"select-box", id:"item-shipping-fee-status"}) %>
         <div class="weight-bold-text">
           発送元の地域
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:area, [], :hoge, :hoge, {}, {class:"select-box", id:"item-prefecture"}) %>
+        <%= f.collection_select(:pref_id, Pref.all, :id, :name, {}, {class:"select-box", id:"item-prefecture"}) %>
         <div class="weight-bold-text">
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:due, [], :hoge, :hoge, {}, {class:"select-box", id:"item-scheduled-delivery"}) %>
+        <%= f.collection_select(:due_id, Due.all, :id, :name, {}, {class:"select-box", id:"item-scheduled-delivery"}) %>
       </div>
     </div>
     <%# /配送について %>
@@ -108,7 +107,7 @@
           </span>
         </div>
         <div class="price-content">
-          <span>販売利益</span>
+          <span>販売利益</span> 
           <span>
             <span id='profit'></span>円
         </div>
@@ -136,15 +135,27 @@
       </p>
     </div>
     <%# /注意書き %>
+
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "出品する" ,class:"sell-btn" %>
-      <%=link_to 'もどる', root_path, class:"back-btn" %>
+      <%= link_to 'もどる', root_path, class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
   </div>
   <% end %>
 
+  <script>
+  const rate = 10;
+  let price = document.getElementById('item-price');
+  let tax = document.getElementById('add-tax-price');
+  let profit = document.getElementById('profit');
+  price.addEventListener('change', function() {
+    let val = this.value;
+    tax.innerHTML = val / rate | 0;
+    profit.innerHTML = val - (val / rate | 0);
+  });
+  </script>
   <footer class="items-sell-footer">
     <ul class="menu">
       <li><a href="#">プライバシーポリシー</a></li>
