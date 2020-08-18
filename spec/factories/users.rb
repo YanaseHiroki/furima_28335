@@ -8,7 +8,7 @@ FactoryBot.define do
     kana_1                { gimei.last.katakana }
     kana_2                { gimei.first.katakana }
     birthday              { Faker::Date.between(from: '1930-1-1', to: 5.years.ago) }
-    password              { Faker::Internet.password(min_length: 6) }
+    password              { Faker::Lorem.characters(number: 6, min_alpha: 1, min_numeric: 1) }
     password_confirmation { password }
   end
 end
