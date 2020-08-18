@@ -35,26 +35,50 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Price can't be blank")
     end
+    it 'category_idが空では出品できない' do
+      @item.category_id = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Category can't be blank")
+    end
     it 'カテゴリーを選択しないと出品できない' do
       @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Category must be other than 1')
     end
-    # 商品の状態、配送料の負担、発送元の地域、発送までの日数
+    it 'state_idが空では出品できない' do
+      @item.state_id = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include("State can't be blank")
+    end
     it '商品の状態を選択しないと出品できない' do
       @item.state_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('State must be other than 1')
+    end
+    it 'charge_idが空では出品できない' do
+      @item.charge_id = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Charge can't be blank")
     end
     it '配送料の負担を選択しないと出品できない' do
       @item.charge_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Charge must be other than 1')
     end
+    it 'pref_idが空では出品できない' do
+      @item.pref_id = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Pref can't be blank")
+    end
     it '発送元の地域を選択しないと出品できない' do
       @item.pref_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include('Pref must be other than 1')
+    end
+    it 'due_idが空では出品できない' do
+      @item.due_id = ''
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Due can't be blank")
     end
     it '発送までの日数を選択しないと出品できない' do
       @item.due_id = 1
