@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :item do
-    title       { Faker::Lorem.sentence }
-    description { Faker::Lorem.sentence }
-    category_id { Faker::Number.between(from: 2, to: 11) }
-    state_id    { Faker::Number.between(from: 2, to: 7) }
-    charge_id   { Faker::Number.between(from: 2, to: 3) }
-    pref_id     { Faker::Number.between(from: 2, to: 48) }
-    due_id      { Faker::Number.between(from: 2, to: 4) }
-    price       { Faker::Number.between(from: 300, to: 9_999_999) }
+    title       { '【美品】アップル製MacBook 13インチSSD 256ギガバイトメモリ8GB' }
+    description { 'ご覧いただきありがとうございます！こちらは最新モデルのMacBookになります!' }
+    category_id { '8' }
+    state_id    { '4' }
+    charge_id   { '3' }
+    pref_id     { '2' }
+    due_id      { '2' }
+    price       { '49800' }
     association :user
   end
 end
