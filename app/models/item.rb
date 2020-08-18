@@ -11,7 +11,7 @@ class Item < ApplicationRecord
     validates :title
     validates :image
     validates :description
-    validates :price
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
     validates :star
     # idが"1"(---)以外の数字か確認
     with_options numericality: { other_than: 1 } do
