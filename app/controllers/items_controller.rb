@@ -2,10 +2,12 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all.order(id: 'DESC')
   end
+
   def new
     authenticate_user!
     @item = Item.new
   end
+
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -29,8 +31,8 @@ class ItemsController < ApplicationController
       :pref_id,
       :due_id
     ).merge(
-      star:'0',
-      user_id:current_user.id
+      star: '0',
+      user_id: current_user.id
     )
   end
 end

@@ -1,10 +1,10 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-    belongs_to_active_hash :category
-    belongs_to_active_hash :state
-    belongs_to_active_hash :charge
-    belongs_to_active_hash :pref
-    belongs_to_active_hash :due
+  belongs_to_active_hash :category
+  belongs_to_active_hash :state
+  belongs_to_active_hash :charge
+  belongs_to_active_hash :pref
+  belongs_to_active_hash :due
   # すべての属性が「空でない」ことを確認
   with_options presence: true do
     validates :user_id
