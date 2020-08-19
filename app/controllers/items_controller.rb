@@ -1,11 +1,10 @@
 class ItemsController < ApplicationController
-    before_action :authenticate_user!, only: [:new]
-      def index
+  before_action :authenticate_user!, only: [:new]
+  def index
     @items = Item.all.order(id: 'DESC')
   end
 
   def new
-
     @item = Item.new
   end
 
@@ -16,6 +15,10 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   private
@@ -32,7 +35,6 @@ class ItemsController < ApplicationController
       :pref_id,
       :due_id
     ).merge(
-      star: '0',
       user_id: current_user.id
     )
   end
