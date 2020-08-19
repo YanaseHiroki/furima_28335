@@ -1,10 +1,29 @@
 class Item < ApplicationRecord
-  # 指定された属性が「空でない」ことを確認
-  validates :user, :title, :image, :description, :category_id, :state_id,
-            :charge_id, :area_id, :due_id, :price, :star, presence: true
-  # "1"以外の数字か確認
-  validates :category_id, :state_id, :charge_id, :area_id, :due_id, numericality: { other_than: 1 }
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :category
+  belongs_to_active_hash :state
+  belongs_to_active_hash :charge
+  belongs_to_active_hash :pref
+  belongs_to_active_hash :due
+  # すべての属性が「空でない」ことを確認
+  with_options presence: true do
+    validates :user_id
+    validates :title
+    validates :image
+    validates :description
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+    validates :star
+    # idが"1"(---)以外の数字か確認
+    with_options numericality: { other_than: 1 } do
+      validates :category_id
+      validates :state_id
+      validates :charge_id
+      validates :pref_id
+      validates :due_id
+    end
+  end
   # アソシエーション
   belongs_to :user
+  has_one_attached :image
   # has_one :buy
 end
