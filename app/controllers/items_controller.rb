@@ -35,7 +35,6 @@ class ItemsController < ApplicationController
       :pref_id,
       :due_id
     ).merge(
-      star: '0',
       user_id: current_user.id
     )
   end
