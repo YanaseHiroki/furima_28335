@@ -1,11 +1,10 @@
 class Buy < ApplicationRecord
   with_options presence: true do
-    validates :user, null: false, foreign_key: true
-    validates :item, null: false, foreign_key: true
+    validates :user, null: false
+    validates :item, null: false
   end
+  # アソシエーション
+  belongs_to :item
+  belongs_to :user
+  has_one :ship
 end
-
-# アソシエーション
-belongs_to :item
-belongs_to :user
-has_one :ship
