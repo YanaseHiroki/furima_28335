@@ -29,7 +29,11 @@ class BuysController < ApplicationController
       if @ship.valid?
         pay_item
         @ship.save
+        # 商品を売り切れにする
+        @item.update(stock: 0)
         return redirect_to root_path
+      else
+        @buy.destroy
       end
     else
       render 'index'
