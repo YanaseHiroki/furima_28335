@@ -9,22 +9,28 @@ class BuysController < ApplicationController
   end
 
   def create
+    # 購入情報を保存する
     @buy = Buy.new(
       user_id: buy_params[:user],
       item_id: buy_params[:item]
     )
-    @ship = Ship.new(
-      postal:  buy_params[:postal],
-      pref_id: buy_params[:pref_id],
-      city:    buy_params[:city],
-      number:  buy_params[:number],
-      house:   buy_params[:house]
-    )
-    if @buy.valid? && @ship.valid?
-      pay_item
+    if @buy.valid?
       @buy.save
-      @ship.save
-      return redirect_to root_path
+      # 発送先情報を保存する
+      @ship = Ship.new(
+        buy_id:  @buy.id,
+        postal:  buy_params[:postal],
+        pref_id: buy_params[:pref_id],
+        city:    buy_params[:city],
+        number:  buy_params[:number],
+        house:   buy_params[:house],
+        tel:     buy_params[:tel]
+      )
+      if @ship.valid?
+        pay_item
+        @ship.save
+        return redirect_to root_path
+      end
     else
       render 'index'
     end
@@ -59,10 +65,10 @@ class BuysController < ApplicationController
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-    Payjp.Charge.create(
+    Payjp::Charge.create(
       amount: @item.price,
-      card: order_params[:token],
-      carrency: 'jpy'
+      card: params[:token],
+      currency: 'jpy'
     )
   end
 end
