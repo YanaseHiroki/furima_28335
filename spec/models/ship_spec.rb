@@ -10,6 +10,7 @@ RSpec.describe Ship, type: :model do
     @item.user_id = @user.id
     @item.image = fixture_file_upload('public/images/test_image.png')
     @item.save
+    sleep 2
     # 新規購入のインスタンスを保存
     @buy = Buy.create(user_id: @user.id, item_id: @item.id)
     # 新規発送先のインスタンスを生成

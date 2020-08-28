@@ -10,6 +10,7 @@ RSpec.describe Buy, type: :model do
     @item.user_id = @user.id
     @item.image = fixture_file_upload('public/images/test_image.png')
     @item.save
+    sleep 2
     # 購入のインスタンスを生成
     @buy = Buy.new(user_id: @user.id, item_id: @item.id)
   end
