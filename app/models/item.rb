@@ -25,5 +25,5 @@ class Item < ApplicationRecord
   # アソシエーション
   belongs_to :user
   has_one_attached :image
-  # has_one :buy
+  has_one :buy
 end
