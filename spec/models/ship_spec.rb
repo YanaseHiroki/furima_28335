@@ -2,18 +2,14 @@ require 'rails_helper'
 
 RSpec.describe Ship, type: :model do
   before do
-    # 新規ユーザーのインスタンスを保存
     @user = FactoryBot.create(:user)
     sleep 2
-    # 新規商品のインスタンスを保存
     @item = FactoryBot.build(:item)
     @item.user_id = @user.id
     @item.image = fixture_file_upload('public/images/test_image.png')
     @item.save
     sleep 2
-    # 新規購入のインスタンスを保存
     @buy = Buy.create(user_id: @user.id, item_id: @item.id)
-    # 新規発送先のインスタンスを生成
     @ship = FactoryBot.build(:ship)
     @ship.buy_id = @buy.id
   end
@@ -27,7 +23,7 @@ RSpec.describe Ship, type: :model do
         expect(@ship).to be_valid
       end
     end
-    context '商品発送先を保存がうまくいかないとき' do
+    context '発送先の保存がうまくいかないとき' do
       it 'postalの値が無ければ発送先を保存できない' do
         @ship.postal = nil
         @ship.valid?

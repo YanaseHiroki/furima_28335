@@ -6,7 +6,6 @@ FactoryBot.define do
     number { '1-3-11' }
     house { 'イケダビルディング' }
     tel { '08012345678' }
-    # buy_id
     association :buy
   end
 end
