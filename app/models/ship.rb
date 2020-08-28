@@ -14,7 +14,6 @@ class Ship < ApplicationRecord
     validates :tel, format: { with: /\A\d{,11}\z/ }
   end
 
-
   # アソシエーション
   belongs_to :buy
 end

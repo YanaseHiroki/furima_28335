@@ -3,35 +3,32 @@ class BuysController < ApplicationController
   before_action :set_item
   before_action :sold_item
   before_action :buyer
-  
+
   def index
     @buy = Buy.new
   end
 
   def create
-    # 購入情報を保存する
     @buy = Buy.new(
       user_id: buy_params[:user],
       item_id: buy_params[:item]
     )
     if @buy.valid?
       @buy.save
-      # 発送先情報を保存する
       @ship = Ship.new(
-        buy_id:  @buy.id,
-        postal:  buy_params[:postal],
+        buy_id: @buy.id,
+        postal: buy_params[:postal],
         pref_id: buy_params[:pref_id],
-        city:    buy_params[:city],
-        number:  buy_params[:number],
-        house:   buy_params[:house],
-        tel:     buy_params[:tel]
+        city: buy_params[:city],
+        number: buy_params[:number],
+        house: buy_params[:house],
+        tel: buy_params[:tel]
       )
       if @ship.valid?
         pay_item
         @ship.save
-        # 商品を売り切れにする
         @item.update(stock: 0)
-        return redirect_to root_path
+        redirect_to root_path
       else
         @buy.destroy
         render 'index'
@@ -40,25 +37,20 @@ class BuysController < ApplicationController
       render 'index'
     end
   end
-  
+
   private
-  
+
   def set_item
     @item = Item.find(params[:item_id])
   end
-  
+
   def buyer
-    if @item.user_id == current_user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.user_id == current_user.id
   end
-  
-  # 購入済みの商品ページへ遷移しようとすると、トップページに遷移する
+
   def sold_item
-    if @item.stock == false
-      redirect_to root_path
-    end
-end
+    redirect_to root_path if @item.stock == false
+  end
 
   def buy_params
     params.require(:buy).permit(
@@ -69,14 +61,14 @@ end
       :number,
       :house,
       :tel
-        ).merge(
+    ).merge(
       user: @item.user_id,
       item: @item.id
     )
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: params[:token],

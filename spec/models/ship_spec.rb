@@ -34,7 +34,7 @@ RSpec.describe Ship, type: :model do
         expect(@ship.errors.full_messages).to include("Postal can't be blank")
       end
       it 'postalの値に"-"（ハイフン）が無ければ発送先を保存できない' do
-        @ship.postal = 7340001
+        @ship.postal = 7_340_001
         @ship.valid?
         expect(@ship.errors.full_messages).to include('Postal is invalid')
       end
@@ -59,7 +59,7 @@ RSpec.describe Ship, type: :model do
         expect(@ship.errors.full_messages).to include("Tel can't be blank")
       end
       it 'telの値が12桁以上のとき発送先を保存できない' do
-        @ship.tel = 111222333444
+        @ship.tel = 111_222_333_444
         @ship.valid?
         expect(@ship.errors.full_messages).to include('Tel is invalid')
       end
