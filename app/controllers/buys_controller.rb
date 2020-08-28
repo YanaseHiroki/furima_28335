@@ -1,11 +1,11 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
-  # # before_action :buyer
-
+  before_action :sold_item
+  before_action :buyer
+  
   def index
     @buy = Buy.new
-  # @buy = BuyShip.new は Name Errorになる
   end
 
   def create
@@ -34,6 +34,7 @@ class BuysController < ApplicationController
         return redirect_to root_path
       else
         @buy.destroy
+        render 'index'
       end
     else
       render 'index'
@@ -42,9 +43,9 @@ class BuysController < ApplicationController
   
   private
   
-    def set_item
-      @item = Item.find(params[:item_id])
-    end
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
   
   def buyer
     if @item.user_id == current_user.id
@@ -52,6 +53,13 @@ class BuysController < ApplicationController
     end
   end
   
+  # 購入済みの商品ページへ遷移しようとすると、トップページに遷移する
+  def sold_item
+    if @item.stock == false
+      redirect_to root_path
+    end
+end
+
   def buy_params
     params.require(:buy).permit(
       :token,
