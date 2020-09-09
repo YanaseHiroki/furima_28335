@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @buy = Buy.find_by(item_id: @item.id)
   end
 
   def edit

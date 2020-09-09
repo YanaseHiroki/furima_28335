@@ -23,14 +23,18 @@
       </span>
     </div>
 
-    <% if @item.user == current_user %>
-    <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-    <p class='or-text'>or</p>
-    <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
+    <% if (@item.user == current_user) && (@item.stock == true) %>
+      <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+      <p class='or-text'>or</p>
+      <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
     <% end %>
-    <% if user_signed_in? && (@item.user != current_user) && (@item.stock == true) %>
-    <%= link_to '購入画面に進む', item_buys_path(@item.id) ,class:"item-red-btn"%>
+    <% if (@item.user != current_user) && (@item.stock == true) && user_signed_in? %>
+      <%= link_to '購入画面に進む', item_buys_path(@item.id) ,class:"item-red-btn"%>
     <% end %>
+    <% if (@item.user == current_user || @buy.user == current_user) && (@item.stock == false) %>
+      <%= link_to '取引画面に進む', item_buy_path(@buy.id) ,class:"item-red-btn"%>
+    <% end %>
+
     <div class="item-explain-box">
       <span><%= @item.description %></span>
     </div>

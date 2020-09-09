@@ -1,0 +1,109 @@
+<%= render "shared/second-header"%>
+
+<div class='transaction-contents'>
+  <div class='transaction-main'>
+    <h1 class='transaction-title-text'>
+      取引中の商品
+    </h1>
+    <%# 購入内容の表示 %>
+    <div class='buy-item-info'>
+      <%= image_tag @item.image, class: 'buy-item-img' %>
+      <div class='buy-item-right-content'>
+        <h2 class='buy-item-text'>
+          <%= @item.title %>
+        </h2>
+        <div class='buy-item-price'>
+          <p class='item-price-text'>¥<%= @item.price %></p>
+          <p class='item-price-sub-text'>（税込）送料込み</p>
+        </div>
+      </div>
+    </div>
+    <%# /購入内容の表示 %>
+
+    <h1 class='transaction-title-text'>
+      発送情報
+    </h1>
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-item">発送日の目安</th>
+          <td class="detail-value"><%= @item.due.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">名前</th>
+          <td class="detail-value"><%= @full_name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">住所</th>
+          <td class="detail-value"><%= @full_address %></td>
+        </tr>
+      </tbody>
+    </table>
+    <h1 class='transaction-title-text'>
+      取引コメント
+    </h1>
+    <div class="comment-practice">
+      <div class="comment-box">
+        <form>
+          <textarea class="comment-text"></textarea>
+          <p class="comment-warn">
+            相手のことを考え丁寧なコメントを心がけましょう。
+            <br>
+            不快な言葉遣いなどは利用制限や退会処分となることがあります。
+          </p>
+          <button type="submit" class="comment-btn">
+            <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
+            <span>コメントする<span>
+          </button>
+        </form>
+      </div>
+    </div>
+    <h1 class='transaction-title-text'>
+      取引の流れ（コメントの例）
+    </h1>
+    <ul class="process-comment">
+      <li class="buyer">
+        <div>
+        <span class="buyer-name">
+          購入者
+        </span><br>
+        商品を購入させていただきました。<br>
+        短い間ですがお取引よろしくお願いします。<br>
+        お手数ですが発送よろしくお願いします。
+        </div>
+      </li>
+      <li class="seller">
+        <div>
+        <span class="seller-name">
+          出品者
+        </span><br>
+        商品を購入していただきありがとうございます。<br>
+        短い間ですがお取引よろしくお願いします。<br>
+        発送日の目安までに発送いたします。<br>
+        発送までしばらくお待ちください。
+        </div>
+      </li>
+      <li class="seller">
+        <div>
+        <span class="seller-name">
+          出品者
+        </span><br>
+        お待たせいたしました。<br>
+        本日、商品を発送いたしました。<br>
+        お受け取りまでしばらくお待ちください。
+        </div>
+      </li>
+      <li class="buyer">
+        <span class="buyer-name">
+          購入者
+        </span><br>
+        <div>
+        商品を受け取り確認いたしました。<br>
+        お取引ありがとうございました。<br>
+        また機会がありましたら、よろしくお願いします。
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<%= render "shared/second-footer"%>
