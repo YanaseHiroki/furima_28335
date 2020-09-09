@@ -1,6 +1,6 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item
+  before_action :set_item, only: [:index, :create]
   before_action :sold_item, only: [:index, :create]
   before_action :buyer, only: [:index, :create]
 
@@ -34,6 +34,7 @@ class BuysController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
     @buy = Buy.find_by(item_id: params[:id])
     user_buy = User.find(@buy.user_id)
     @full_name = "#{user_buy.name_1} #{user_buy.name_2}"
@@ -44,7 +45,7 @@ class BuysController < ApplicationController
   private
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
   end
 
   def buyer

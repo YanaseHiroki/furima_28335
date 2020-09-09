@@ -136,7 +136,7 @@
 
 /* 取引の流れ（コメントの例）の表示 */
 .process-comment {
-  color: rgb(73, 73, 73);
+  color: gray;
 }
 
 .seller {
