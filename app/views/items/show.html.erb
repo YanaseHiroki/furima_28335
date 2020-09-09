@@ -29,7 +29,7 @@
       <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
     <% elsif (@item.user != current_user) && (@item.stock == true) && user_signed_in? %>
       <%= link_to '購入画面に進む', item_buys_path(@item.id) ,class:"item-red-btn"%>
-    <% elsif (@item.user == current_user || @buy.user == current_user) && (@item.stock == false) %>
+    <% elsif @buy && (@item.user == current_user || @buy.user == current_user) && (@item.stock == false) %>
       <%= link_to '取引画面に進む', item_buy_path(@buy.id) ,class:"item-red-btn"%>
     <% end %>
 

@@ -13,21 +13,26 @@ class BuysController < ApplicationController
       user_id: buy_params[:user],
       item_id: buy_params[:item]
     )
-    @ship = Ship.new(
-      buy_id: @buy.id,
-      postal: buy_params[:postal],
-      pref_id: buy_params[:pref_id],
-      city: buy_params[:city],
-      number: buy_params[:number],
-      house: buy_params[:house],
-      tel: buy_params[:tel]
-    )
-    if @buy.valid? && @ship.valid?
+    if @buy.valid?
       @buy.save
-      @ship.save
-      @item.update(stock: 0)
-      pay_item
-      redirect_to root_path
+      @ship = Ship.new(
+        buy_id: @buy.id,
+        postal: buy_params[:postal],
+        pref_id: buy_params[:pref_id],
+        city: buy_params[:city],
+        number: buy_params[:number],
+        house: buy_params[:house],
+        tel: buy_params[:tel]
+      )
+      if @ship.valid?
+        pay_item
+        @ship.save
+        @item.update(stock: 0)
+        redirect_to root_path
+      else
+        @buy.destroy
+        render 'index'
+      end
     else
       render 'index'
     end
@@ -66,7 +71,7 @@ class BuysController < ApplicationController
       :house,
       :tel
     ).merge(
-      user: @item.user_id,
+      user: current_user.id,
       item: @item.id
     )
   end
